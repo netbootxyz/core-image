@@ -9,11 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-    image: docker:20.10.21
-    env:
-      DOCKER_DRIVER: overlay2
-      DOCKER_TLS_CERTDIR: ""
-      CURRENT_TAG: 0.0.1
+      image: docker:20.10.21
+      env:
+        DOCKER_DRIVER: overlay2
+        DOCKER_TLS_CERTDIR: ""
+        CURRENT_TAG: 0.0.1
     steps:
     - name: Checkout
       uses: actions/checkout@v3
