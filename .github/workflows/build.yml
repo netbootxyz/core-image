@@ -1,9 +1,8 @@
 name: Generate Images
 on:
-  workflow_run:
-    workflows: ["Build Kernel"]
-    types:
-      - completed
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
     
 jobs:
@@ -19,7 +18,7 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: '0'
-    - name: Build core image
+    - name: Build core kernel
       run: |
         apk add git make
         cd kernel
