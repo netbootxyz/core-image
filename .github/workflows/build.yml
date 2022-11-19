@@ -1,0 +1,49 @@
+name: Generate Images
+on:
+  workflow_run:
+    workflows: ["Build Kernel"]
+    types:
+      - completed
+  workflow_dispatch:
+    
+jobs:
+  build-kernel:
+    runs-on: ubuntu-latest
+    container:
+      image: docker:20.10.21
+      env:
+        DOCKER_DRIVER: overlay2
+        DOCKER_TLS_CERTDIR: ""
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
+    - name: Build core image
+      run: |
+        apk add git make
+        cd kernel
+        KERNEL_SHA=`git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'`
+        make kconfig
+
+  build-os:
+    needs: build-kernel
+    runs-on: ubuntu-latest
+    container:
+      image: docker:20.10.21
+      env:
+        DOCKER_DRIVER: overlay2
+        DOCKER_TLS_CERTDIR: ""
+        CURRENT_TAG: 0.0.1
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
+    - name: Build core image
+      run: |
+        apk add git wget docker curl make
+        mkdir -p out
+        wget https://github.com/linuxkit/linuxkit/releases/download/v1.0.1/linuxkit-linux-amd64
+        chmod +x linuxkit-linux-amd64
+        ./linuxkit-linux-amd64 build -format kernel+initrd -format iso-efi-initrd -format kernel+iso -name core -dir out core.yml
