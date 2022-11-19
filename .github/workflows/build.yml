@@ -32,7 +32,7 @@ jobs:
         cd kernel
         KERNEL_SHA=`git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'`
         make kconfig
-        make ORG=ghcr.io/netbootxyz/core
+        make ORG=ghcr.io/netbootxyz/core build_5.15.x
         docker push ghcr.io/netbootxyz/core:kernel:5.15.27-${KERNEL_SHA}-amd64
 
   build-os:
