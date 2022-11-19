@@ -3,6 +3,10 @@ on:
   pull_request:
     branches:
       - master
+  workflow_run:
+    workflows: ["Build Kernel"]
+    types:
+      - completed
   workflow_dispatch:
     
 jobs:
