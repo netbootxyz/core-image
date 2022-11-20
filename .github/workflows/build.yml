@@ -21,7 +21,6 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-        set-safe-directory: false
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
     - name: Login to the GitHub Container Registry
@@ -33,7 +32,6 @@ jobs:
     - name: Build core kernel
       run: |
         git --version
-        git config --global --add safe.directory "$GITHUB_WORKSPACE"
         export KERNEL_SHA=`git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'`
         echo Current KERNEL_SHA is $KERNEL_SHA
         ls -la .
