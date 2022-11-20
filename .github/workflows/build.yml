@@ -30,11 +30,13 @@ jobs:
       run: |
         apk add git make
         export KERNEL_SHA=`git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'`
-        echo Current KERNEL_SHA is $KERNEL_SHA 
+        echo Current KERNEL_SHA is $KERNEL_SHA
+        ls -la .
+
         cd kernel
-        make kconfig
-        make ORG=ghcr.io/netbootxyz build_5.15.x
-        docker push ghcr.io/netbootxyz/kernel:5.15.27-$KERNEL_SHA-amd64
+        #make kconfig
+        #make ORG=ghcr.io/netbootxyz build_5.15.x
+        #docker push ghcr.io/netbootxyz/kernel:5.15.27-$KERNEL_SHA-amd64
 
   build-os:
     needs: build-kernel
