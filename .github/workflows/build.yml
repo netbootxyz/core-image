@@ -33,9 +33,10 @@ jobs:
       run: |
         git --version
         cd kernel
-        #git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
         KERNEL_SHA=`git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'`
         echo Current KERNEL_SHA is $KERNEL_SHA
+        git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'
         ls -la .
 
         #make kconfig
