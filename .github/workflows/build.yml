@@ -14,6 +14,9 @@ jobs:
         DOCKER_DRIVER: overlay2
         DOCKER_TLS_CERTDIR: ""
     steps:
+    - name: Build core kernel
+      run: |
+        apk add git make
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -29,7 +32,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build core kernel
       run: |
-        apk add git make
         git --version
         git config --global --add safe.directory "$GITHUB_WORKSPACE"
         export KERNEL_SHA=`git ls-tree --full-tree HEAD -- kernel | awk '{print $3}'`
