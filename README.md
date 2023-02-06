@@ -1,4 +1,4 @@
-# netboot.xyz core linuxkit image
+# netboot.xyz core image
 
 Work in progress
 
