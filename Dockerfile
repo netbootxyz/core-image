@@ -1,4 +1,4 @@
-FROM docker:23.0.0
+FROM docker:23.0.1
 
 RUN \
  mkdir /image
