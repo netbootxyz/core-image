@@ -18,7 +18,7 @@ jobs:
       run: |
         apk add git make
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 0
     - name: Set up Docker Buildx
@@ -50,7 +50,7 @@ jobs:
         CURRENT_TAG: 0.0.1
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: '0'
     - name: Build core image
