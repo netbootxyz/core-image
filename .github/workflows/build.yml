@@ -9,7 +9,7 @@ jobs:
   build-kernel:
     runs-on: ubuntu-latest
     container:
-      image: docker:24.0.5
+      image: docker:25.0.5
       env:
         DOCKER_DRIVER: overlay2
         DOCKER_TLS_CERTDIR: ""
@@ -43,7 +43,7 @@ jobs:
     needs: build-kernel
     runs-on: ubuntu-latest
     container:
-      image: docker:24.0.5
+      image: docker:25.0.5
       env:
         DOCKER_DRIVER: overlay2
         DOCKER_TLS_CERTDIR: ""
